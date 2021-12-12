@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libreria.Core.Entities
@@ -23,5 +24,7 @@ namespace Libreria.Core.Entities
         public int EditorialId { get; set; }
 
         public Editorial Editorial { get; set; }
+
+        public List<AutorLibro> AutorLibro { get; set; }
     }
 }

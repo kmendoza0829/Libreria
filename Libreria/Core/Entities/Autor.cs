@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libreria.Core.Entities
@@ -18,5 +19,7 @@ namespace Libreria.Core.Entities
 
         [Column("status")]
         public bool Status { get; set; }
+
+        public List<AutorLibro> AutorLibro { get; set; }
     }
 }

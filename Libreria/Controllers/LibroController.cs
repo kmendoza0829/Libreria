@@ -1,6 +1,7 @@
 ﻿using Libreria.Core.Entities;
 using Libreria.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,11 +14,15 @@ namespace Libreria.Controllers
     public class LibroController : ControllerBase
     {
         private readonly ILibro _libro;
+        private readonly IAutorLibro _autorLibro;
 
-        public LibroController(ILibro libro)
+        public LibroController(ILibro libro, IAutorLibro autorLibro)
         {
             _libro = libro;
+            _autorLibro = autorLibro;
         }
+
+
 
 
         // GET: api/<LibroController>
@@ -26,6 +31,7 @@ namespace Libreria.Controllers
         {
             try
             {
+                IEnumerable<AutorLibro>  a = await _autorLibro.GetAutorLibrosAsync();
                 IEnumerable<Libro> libros = await _libro.GetLibroAsync();
                 return Ok(libros);
             }
@@ -54,11 +60,21 @@ namespace Libreria.Controllers
 
         // POST api/<AutoresController>
         [HttpPost]
-        public async Task<ActionResult<Libro>> Post([FromBody] Libro libro)
+        public async Task<ActionResult<CreateLibroResponse>> Post([FromBody] LibroModelView libro)
         {
+            CreateLibroResponse result = new();
             try
             {
-                return Ok(await _libro.CreateLibrosAsync(libro));
+                Libro libroCreated = await _libro.CreateLibrosAsync(libro.Libro);
+                AutorLibro autorLibroNew = new()
+                {
+                    LibroId = libro.Libro.LibrosId,
+                    AutorId = libro.AutorId
+                };
+                await _autorLibro.CreateAutorLibroAsync(autorLibroNew);
+                result.LibroId = libroCreated.LibrosId;
+               
+                return new JsonResult(result);
             }
             catch (System.Exception)
             {

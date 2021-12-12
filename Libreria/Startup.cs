@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Libreria
@@ -33,6 +34,7 @@ namespace Libreria
             services.AddTransient<IEditorial, EditorialRepository>();
             services.AddTransient<IAutor, AutorRepository>();
             services.AddTransient<ILibro, LibroRepository>();
+            services.AddTransient<IAutorLibro, AutorLibroRepository>();
             #endregion
 
             services.AddControllers();
