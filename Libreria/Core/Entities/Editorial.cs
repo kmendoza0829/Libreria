@@ -15,5 +15,8 @@ namespace Libreria.Core.Entities
 
         [Column("sede")]
         public string Sede { get; set; }
+        
+        [Column("status")]
+        public bool Status { get; set; }
     }
 }

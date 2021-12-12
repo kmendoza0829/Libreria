@@ -20,9 +20,6 @@ namespace Libreria.Controllers
             _editorial = editorial;
         }
 
-
-
-
         // GET: api/<EditorialesController>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Editorial>>> Get()
@@ -41,27 +38,63 @@ namespace Libreria.Controllers
 
         // GET api/<EditorialesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Editorial>> Get(int id)
         {
-            return "value";
+            try
+            {
+                Editorial editorial =  await _editorial.GetEditorialesByIdAsync(id);
+                return Ok(editorial);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+            }
         }
 
         // POST api/<EditorialesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Editorial>> Post([FromBody] Editorial editorial)
         {
+            try
+            {
+                return Ok(await _editorial.CreateEditorialAsync(editorial));
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
 
         // PUT api/<EditorialesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<Editorial>> Put(int id, [FromBody] Editorial editorial)
         {
+            try
+            {
+                return Ok(await _editorial.EditEditorialAsync(id, editorial));
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
 
         // DELETE api/<EditorialesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
+            try
+            {
+                await _editorial.DeleteEditorialAsync(id);
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
