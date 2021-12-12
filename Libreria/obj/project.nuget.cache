@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Ov5S3pI7PquCzNvHUVkX6wwq0lhbTCoVqsrWIO7UIaM3PtPHJ2qR+6WrkfiGHyuYVpnDBoCwg7CbNUCKwQ2vYQ==",
+  "dgSpecHash": "YH7jGmPu6KskWS04a03PbS+t9kCY9reKF06Q0zFoMk0N9WSjtzQWSMgH5rlED4811y8UOb+Od8UU8Mbe7qsNAQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\RED5G\\Documents\\Proyectos\\Personal\\Libreria\\Libreria\\Libreria.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\RED5G\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\RED5G\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\RED5G\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.12\\microsoft.aspnetcore.authentication.jwtbearer.5.0.12.nupkg.sha512",
     "C:\\Users\\RED5G\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

@@ -1,4 +1,6 @@
-﻿namespace Libreria.Auth
+﻿using System.Threading.Tasks;
+
+namespace Libreria.Auth
 {
     public interface IJwtAuthenticationService
     {

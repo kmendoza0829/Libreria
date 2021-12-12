@@ -34,12 +34,13 @@ namespace Libreria
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string key = "this is my custom Secret key for authnetication";
+            string key = Configuration.GetSection("JWT").GetSection("Key").Value;// "this is my custom Secret key for authnetication";
             #region Injeccion de Intefaces y clases que se implementan
             services.AddTransient<IEditorial, EditorialRepository>();
             services.AddTransient<IAutor, AutorRepository>();
             services.AddTransient<ILibro, LibroRepository>();
             services.AddTransient<IAutorLibro, AutorLibroRepository>();
+            services.AddTransient<IUsuarios, UsuariosRepository>();
             #endregion
 
             services.AddControllers();

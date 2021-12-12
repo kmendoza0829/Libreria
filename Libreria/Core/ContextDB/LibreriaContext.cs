@@ -30,5 +30,6 @@ namespace Libreria.Core.ContextDB
         public DbSet<Autor> Autor { get; set; }
         public DbSet<Libro> Libro { get; set; }
         public DbSet<AutorLibro> AutorLibro { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
     }
 }

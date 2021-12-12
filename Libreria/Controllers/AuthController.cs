@@ -3,6 +3,7 @@ using Libreria.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Libreria.Controllers
 {
@@ -22,6 +23,7 @@ namespace Libreria.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthInfo user)
         {
+
             var token = _authService.Authenticate(user.Username, user.Password);
             if(token == null)
             {
@@ -29,5 +31,7 @@ namespace Libreria.Controllers
             }
             return Ok(token);
         }
+
+
     }
 }

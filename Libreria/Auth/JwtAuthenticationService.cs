@@ -1,8 +1,11 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Libreria.Core.Entities;
+using Libreria.Repository;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Libreria.Auth
 {
@@ -17,10 +20,14 @@ namespace Libreria.Auth
 
         public string Authenticate(string username, string password)
         {
+            
+
+
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password) || username != "demo" || password != "123456")
             {
                 return null;
             }
+
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(_key);
