@@ -11,5 +11,6 @@ namespace Libreria.Core.ContextDB
         }
         public DbSet<Editorial> Editorial { get; set; }
         public DbSet<Autor> Autor { get; set; }
+        public DbSet<Libro> Libro { get; set; }
     }
 }

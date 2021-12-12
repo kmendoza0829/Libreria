@@ -8,7 +8,7 @@ namespace Libreria.Core.Entities
     {
         [Column("id")]
         [Key]
-        public int Id { get; set; }
+        public int AutorId { get; set; }
 
         [Column("nombre")]
         public string Nombre { get; set; }

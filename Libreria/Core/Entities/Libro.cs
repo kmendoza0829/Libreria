@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Libreria.Core.Entities
 {
     [Table("libros")]
-    public class Libros
+    public class Libro
     {
         [Column("ISBN")]
         [Key]
-        public int ISBN { get; set; }
+        public int LibrosId { get; set; }
 
         [Column("titulo")]
         public string Titulo { get; set; }
@@ -18,9 +18,9 @@ namespace Libreria.Core.Entities
 
         [Column("n_paginas")]
         public int NPaginas { get; set; }
-        
+
         [Column("editoriales_id")]
-        public int EditorialesId { get; set; }
+        public int EditorialId { get; set; }
 
         public Editorial Editorial { get; set; }
     }
