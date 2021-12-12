@@ -31,6 +31,7 @@ namespace Libreria
         {
             #region Injeccion de Intefaces y clases que se implementan
             services.AddTransient<IEditorial, EditorialRepository>();
+            services.AddTransient<IAutor, AutorRepository>();
             #endregion
 
             services.AddControllers();
