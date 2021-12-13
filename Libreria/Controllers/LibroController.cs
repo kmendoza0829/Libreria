@@ -1,7 +1,7 @@
 ﻿using Libreria.Core.Entities;
 using Libreria.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Libreria.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class LibroController : ControllerBase
@@ -27,13 +28,31 @@ namespace Libreria.Controllers
 
         // GET: api/<LibroController>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Libro>>> Get()
+        public async Task<ActionResult<LibrosResponse>> Get()
         {
             try
             {
-                IEnumerable<AutorLibro>  a = await _autorLibro.GetAutorLibrosAsync();
+                //Ojo se realiza consulta a entidad many to many, pero al parece JSON tiene problemas con estas entidades
+                //Al Aplicar la solucion no queda de la mejor manera, para consumir desde el front
+                //https://gavilan.blog/2021/05/19/fixing-the-error-a-possible-object-cycle-was-detected-in-different-versions-of-asp-net-core/
+                IEnumerable<AutorLibro> a = await _autorLibro.GetAutorLibrosAsync();
                 IEnumerable<Libro> libros = await _libro.GetLibroAsync();
-                return Ok(libros);
+                List<LibrosResponse> llr = new();
+                foreach (var item in libros)
+                {
+                    AutorLibro q = await _autorLibro.GetAutorLibroByIdLibroAsync(item.LibrosId);
+                    Autor autor = new();
+                    autor.Status = q.Autor.Status;
+                    autor.AutorId = q.Autor.AutorId;
+                    autor.Apellidos = q.Autor.Apellidos;
+                    autor.Nombre = q.Autor.Nombre;
+                    autor.Status = q.Autor.Status;
+                    LibrosResponse librosResponse = new();
+                    librosResponse.Autor = autor;
+                    librosResponse.Libro = item;
+                    llr.Add(librosResponse);
+                }
+                return Ok(llr);
             }
             catch (System.Exception)
             {
@@ -73,7 +92,7 @@ namespace Libreria.Controllers
                 };
                 await _autorLibro.CreateAutorLibroAsync(autorLibroNew);
                 result.LibroId = libroCreated.LibrosId;
-               
+
                 return new JsonResult(result);
             }
             catch (System.Exception)

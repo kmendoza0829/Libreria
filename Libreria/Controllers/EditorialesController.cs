@@ -1,5 +1,6 @@
 ﻿using Libreria.Core.Entities;
 using Libreria.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Libreria.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class EditorialesController : ControllerBase

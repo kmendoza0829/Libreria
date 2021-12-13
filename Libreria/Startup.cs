@@ -68,7 +68,13 @@ namespace Libreria
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Libreria", Version = "v1" });
             });
-
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsRule", rule =>
+                {
+                    rule.AllowAnyHeader().AllowAnyMethod().WithOrigins("*");
+                });
+            });
             //Se agrega context de BD de Pruebas   
             services.AddDbContext<LibreriaContext>(options =>
                                                        options.UseSqlServer(Configuration.GetConnectionString("TravelContext")));
@@ -85,7 +91,7 @@ namespace Libreria
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors("CorsRule");
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
